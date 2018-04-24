@@ -12,9 +12,8 @@ import android.widget.Toast;
 import com.step.lifehuck.R;
 import com.step.lifehuck.di.BaseApp;
 import com.step.lifehuck.entities.Good;
-import com.step.lifehuck.entities.LifeHuck;
 import com.step.lifehuck.mvp.contracts.MainContract;
-import com.step.lifehuck.utils.adapters.LifeHuckRVAdapter;
+import com.step.lifehuck.utils.adapters.GoodsRVAdapter;
 
 import java.util.List;
 
@@ -25,23 +24,18 @@ import io.reactivex.subjects.PublishSubject;
 
 public class MainActivity extends AppCompatActivity implements MainContract.view {
     @Inject MainContract.presenter presenter;
-    RecyclerView huchsRecyclerView;
-    LifeHuckRVAdapter huckRVAdapter;
+    RecyclerView goodsRecyclerView;
+    GoodsRVAdapter goodsRVAdapter;
     ProgressBar progressBar;
-
-
-
-    void initRecycler(){
-        huckRVAdapter = new LifeHuckRVAdapter();
-        huchsRecyclerView = findViewById(R.id.rvLifeHucks);
-        huchsRecyclerView.setAdapter(huckRVAdapter);
-        huchsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
-
     Button upadateBtn;
 
 
-
+    void initRecycler(){
+        goodsRVAdapter = new GoodsRVAdapter();
+        goodsRecyclerView = findViewById(R.id.rvLifeHucks);
+        goodsRecyclerView.setAdapter(goodsRVAdapter);
+        goodsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,19 +61,19 @@ public class MainActivity extends AppCompatActivity implements MainContract.view
 
     @Override
     public void showGoods(List<Good> goods) {
-        huckRVAdapter.setGoods(goods);
+        goodsRVAdapter.setGoods(goods);
     }
 
     @Override
     public void showIndicator() {
         progressBar.setVisibility(View.VISIBLE);
-        huchsRecyclerView.setVisibility(View.GONE);
+        goodsRecyclerView.setVisibility(View.GONE);
     }
 
     @Override
     public void hideIndicetor() {
         progressBar.setVisibility(View.GONE);
-        huchsRecyclerView.setVisibility(View.VISIBLE);
+        goodsRecyclerView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -91,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.view
 
     @Override
     public Observable<String> onSelectView() {
-        return huckRVAdapter.onItemClick();
+        return goodsRVAdapter.onItemClick();
     }
 
     @Override

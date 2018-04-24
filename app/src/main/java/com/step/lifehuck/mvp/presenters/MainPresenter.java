@@ -38,10 +38,6 @@ public class MainPresenter implements MainContract.presenter {
             view.showToast("Stop loading");
             view.showGoods(goods);
         });
-//        model.getHucks().subscribe(hucks->{
-//
-//            view.showHucks(hucks);
-//        });
     }
 
     @Override

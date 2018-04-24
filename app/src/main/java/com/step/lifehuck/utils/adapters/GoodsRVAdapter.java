@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.step.lifehuck.R;
 import com.step.lifehuck.entities.Good;
-import com.step.lifehuck.entities.LifeHuck;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,7 @@ import io.reactivex.subjects.PublishSubject;
  * Created by mamedov on 02.04.2018.
  */
 
-public class LifeHuckRVAdapter extends RecyclerView.Adapter<LifeHuckRVAdapter.ViewHolder> {
+public class GoodsRVAdapter extends RecyclerView.Adapter<GoodsRVAdapter.ViewHolder> {
     List<Good> goods = new ArrayList<>();
     PublishSubject<String> onItemClicker = PublishSubject.create();
     Context ctx;

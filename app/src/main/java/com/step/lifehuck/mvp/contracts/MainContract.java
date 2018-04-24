@@ -1,7 +1,6 @@
 package com.step.lifehuck.mvp.contracts;
 
 import com.step.lifehuck.entities.Good;
-import com.step.lifehuck.entities.LifeHuck;
 
 import java.util.List;
 
@@ -23,7 +22,6 @@ public interface MainContract {
     }
     interface presenter extends Presenter<view>{}
     interface model{
-        Observable<List<LifeHuck>> getHucks();
         Observable<List<Good>> getGoods();
     }
 }

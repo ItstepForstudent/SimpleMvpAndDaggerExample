@@ -3,7 +3,6 @@ package com.step.lifehuck.mvp.models;
 import android.util.Log;
 
 import com.step.lifehuck.entities.Good;
-import com.step.lifehuck.entities.LifeHuck;
 import com.step.lifehuck.mvp.contracts.MainContract;
 
 import org.jsoup.Jsoup;
@@ -16,7 +15,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -25,41 +23,6 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class MainModel implements MainContract.model {
-    @Override
-    public Observable<List<LifeHuck>> getHucks() {
-        return Observable.fromCallable(()->{
-            List<LifeHuck> hucks = new ArrayList<>();
-            try{
-                Document doc = Jsoup.connect("https://lifehacker.ru/").get();
-                Elements slots = doc.select(".stripe__slot");
-
-                for(Element slot:slots){
-                    try {
-                        Element img = slot.selectFirst(".stripe-item__img-background");
-                        String imgSrc = img.attr("data-src");
-                        Element nameElem = slot.selectFirst(".stripe-item__title");
-                        String name = nameElem.html();
-                        Element viwsElem = slot.selectFirst(".views-counter");
-                        Log.i("--LGSX--",slot.selectFirst(".ab-link").toString());
-                        int views;
-                        try {
-                            views = Integer.parseInt(viwsElem.html().replace(" ", ""));
-                        } catch (Exception e) {
-                            views = 0;
-                        }
-                        hucks.add(new LifeHuck(name, imgSrc, views,""));
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-                }
-
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            return hucks;
-        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-
-    }
 
     public Observable<List<Good>> getGoods() {
         return Observable.fromCallable(() -> {
